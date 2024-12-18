@@ -1,6 +1,6 @@
-import Button from "./Button";
-import Label from "./Label.jsx";
-import Card from "./Card.jsx";
+import Button from "./components/Button.jsx";
+import Label from "./components/Label.jsx";
+import Card from "./components/Card.jsx";
 import "./LandingPage.css";
 
 function LandingPage({
