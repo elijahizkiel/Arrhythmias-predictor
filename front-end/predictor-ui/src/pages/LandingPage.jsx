@@ -1,7 +1,8 @@
-import Button from "./components/Button.jsx";
-import Label from "./components/Label.jsx";
-import Card from "./components/Card.jsx";
+import Button from "../components/Button.jsx";
+import Label from "../components/Label.jsx";
+import Card from "../components/Card.jsx";
 import "./LandingPage.css";
+import assets from "../assets/imgs.js";
 
 function LandingPage({
   loginState,
@@ -18,7 +19,14 @@ function LandingPage({
           sendRequest={onLogInBtnCLick}
           text={loginState ? "LogOut" : "Login/Signup"}
           classes="login-signup btn"
-        />
+          style={{'display':'flex'}}
+        >
+          {loginState? 
+          <span class="material-symbols-outlined">
+            logout
+          </span>:
+          null}
+        </Button>
       </header>
       <div className="ellipse one"></div>
       <div className="ellipse two"></div>
@@ -49,7 +57,7 @@ function LandingPage({
         </div>
         <img
           className="doctor"
-          src="../assets/doctor-landing-page.jpg"
+          src={assets.doctr}
           alt="doctor waiting for patient with smile"
         />
       </div>
