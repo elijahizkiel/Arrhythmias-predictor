@@ -64,7 +64,7 @@ header {
   display: grid;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  margin: 15vh;
+  margin: 5vh 15vw;
 }
 .hero-texts {
   justify-content: center;
@@ -72,7 +72,7 @@ header {
 .hero-title {
   text-align: center;
   font: 600 normal 2rem/1.5 var(--konkhmer-sleokchher--), sans-serif;
-  margin: 5vw;
+  margin: 5vw auto;
 }
 .hero-paragraph.bold {
   font: 600 normal 1.5rem/1.5 var(--poppins--), Arial, sans-serif;
@@ -85,6 +85,9 @@ header {
   padding-left: 0.5%;
   margin: 5vh 1vh;
   margin-top: 1vh;
+}
+.doctor {
+  width: 100%;
 }
 .services-list {
   display: grid;
