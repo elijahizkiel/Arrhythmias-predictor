@@ -9,23 +9,21 @@ function LandingPage({
   onLogInBtnCLick,
   onDiagnoseBtnClick,
   onChatServBtnClick,
-  onContactListClick,
+  onContactList,
 }) {
   return (
-    <div style={{ paddingBottom: "20vh" }}>
+    <div style={{ paddingBottom: "20vh", marginBottom: "10vh" }}>
       <header>
         <Label classes="logo" text="we care" />
         <Button
           sendRequest={onLogInBtnCLick}
           text={loginState ? "LogOut" : "Login/Signup"}
           classes="login-signup btn"
-          style={{'display':'flex'}}
+          style={{ display: "flex" }}
         >
-          {loginState? 
-          <span class="material-symbols-outlined">
-            logout
-          </span>:
-          null}
+          {loginState ? (
+            <span class="material-symbols-outlined">logout</span>
+          ) : null}
         </Button>
       </header>
       <div className="ellipse one"></div>
@@ -57,7 +55,7 @@ function LandingPage({
         </div>
         <img
           className="doctor"
-          src={assets.doctr}
+          src={assets.doctorLanding}
           alt="doctor waiting for patient with smile"
         />
       </div>
@@ -76,10 +74,10 @@ function LandingPage({
                 diagnoses whenever you need them"
         />
         <Card classes="service-card">
-          <Button 
-          classes="btn secondary " 
-          sendRequest={onContactListClick} 
-          text="Contact List" 
+          <Button
+            classes="btn secondary "
+            sendRequest={onContactList}
+            text="Contact List"
           />
         </Card>
       </div>
