@@ -1,5 +1,5 @@
-import doctorSignup from './doctor-signup-page.jpg';  
-import doctorLanding from './doctor-signup-page.jpg';
+import doctorSignup from './doctor-signup-page.png';  
+import doctorLanding from './doctor-landing-page.png';
 
 const assets = {
     doctorSignup,
