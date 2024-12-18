@@ -1,6 +1,6 @@
-function Button({classes, style, text, sendRequest}){
+function Button({children, classes, style, text, sendRequest}){
     return <div className={classes} style={style} onClick={sendRequest}>
-        {text}
+        {text}{children}
     </div>
     
 }
