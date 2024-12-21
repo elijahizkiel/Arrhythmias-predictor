@@ -19,7 +19,7 @@ function LandingPage({
           sendRequest={onLogInBtnCLick}
           text={loginState ? "LogOut" : "Login/Signup"}
           classes="login-signup btn"
-          style={{ display: "flex" }}
+          style={{ display: "flex", fontFamily: "serif" }}
         >
           {loginState ? (
             <span class="material-symbols-outlined">logout</span>
@@ -45,11 +45,13 @@ function LandingPage({
           <Button
             text="Diagnose"
             classes="btn primary"
+            style={{ display: "inline-block", fontFamily: "serif" }}
             sendRequest={onDiagnoseBtnClick}
           />
           <Button
             text="Chat Service"
             classes="btn secondary"
+            style={{ fontFamily: "serif", display: "inline-block" }}
             sendRequest={onChatServBtnClick}
           />
         </div>

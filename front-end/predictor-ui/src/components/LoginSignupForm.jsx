@@ -10,7 +10,9 @@ function LoginSignupForm({
   onLogin,
 }) {
   return (
-    <>
+    <div className="login-form">
+      <Label classes='login-logo' text="we care" />
+      <h1>{hasAccount ? "Login" : "Create Account"}</h1>
       {!hasAccount && (
         <div className="name-fields">
           <InputField
@@ -18,7 +20,7 @@ function LoginSignupForm({
             classes="name input"
             id="first-name"
             label="First Name"
-            required="true"
+            required={true}
           />
           <InputField
             type="text"
@@ -32,16 +34,16 @@ function LoginSignupForm({
         type="email"
         classes="email input"
         id="user-email"
-        label="Email"
-        required="true"
+        label={hasAccount ? "Email or Username" : "Email"}
+        required={true}
       />
       {!hasAccount && (
         <InputField
           type="text"
-          classes="username-field"
+          classes="username-field input"
           id="username"
           label="User Name"
-          required="true"
+          required={true}
         />
       )}
       <InputField
@@ -49,29 +51,35 @@ function LoginSignupForm({
         classes="password input"
         id="user-password"
         label="Password"
-        required="true"
+        required={true}
       />
       <Button
         text={hasAccount ? "Login" : "Create Account"}
         classes="btn primary"
-        style={{ width: "100%", color: "#E2FAFF", backgroundColor: "#0b9cbd" }}
+        style={{ margin: "2vh 1vh" }}
         sendRequest={hasAccount ? onLogin : onCreatAccount}
       />
-      <Label text={hasAccount ? "Don't have account? " : "Have account? "}>
-        <div
-          style={{ color: "#0b9cbd", cursor: "pointer" }}
+      <Label
+        text={hasAccount ? "Don't have account? " : "Alreadry have account? "}
+      >
+        <span
+          style={{ color: " #0b9cbd", cursor: "pointer" }}
           onClick={hasAccount ? onSignup : onLogin}
         >
           {hasAccount ? "Signup" : "Login"}
-        </div>
+        </span>
       </Label>
       <Button
         text="Continue with Google"
         classes="btn secondary"
-        style={{ width: "100%", border: "2px solid #0b9cbd" }}
+        style={{
+          margin: "1vh 1vh",
+          color: "#AFAFAF",
+          border: "1px solid #0b9cbd",
+        }}
         sendRequest={onContinueWithGoogle}
       />
-    </>
+    </div>
   );
 }
 

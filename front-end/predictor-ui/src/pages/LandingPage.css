@@ -19,20 +19,19 @@ header {
   font: 700 normal 2rem/1.5 var(--konkhmer-sleokchher--), sans-serif;
 }
 .btn {
-  display: inline-block;
   background-color: var(--color2--);
   color: var(--color1--);
-  font: 500 normal 1rem/1.5 serif;
+  font: 500 normal 1rem/1.5 var(--poppins--),Arial,sans-serif;
   padding: 0.5vh 1.5vh;
   border-radius: 5px;
   margin: 1vh 2vw;
   cursor: pointer;
+  text-align: center;
 }
 .btn.primary {
   background-color: var(--color2--);
   color: var(--color1--);
   padding: 0.5vw 5vw;
-  border-radius: 2px;
   margin-left: 0;
 }
 .btn.secondary {
@@ -40,8 +39,10 @@ header {
   background-color: var(--color4--);
   border: #a0a0a0da solid 1px;
   padding: 0.5vw 5vw;
-  border-radius: 3px;
   margin-left: 0;
+}
+.btn:hover{
+  box-shadow: 7px 7px 7px #7f8e919e;
 }
 .ellipse {
   width: max(35vw, 35vh);

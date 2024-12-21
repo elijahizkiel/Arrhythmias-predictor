@@ -1,38 +1,97 @@
-.App {
+.login-page {
+  display: grid;
+  gap: 1vh;
+  grid-template-columns: 7fr 6fr;
+  padding-right: 1vw;
+}
+.login-page-promo{
+  overflow: hidden;
+  width:45vw;
+  height: 100%;
+}
+.circle {
+  width: 30vh;
+  height: 30vh;
+  border-radius: 50%;
+  position: absolute;
+  background-color: #fff;
+}
+.circle.one {
+  left: 37.5vw;
+  top: -13vh;
+}
+.circle.two {
+  left: 37.5vw;
+  bottom: -12vh;
+}
+.login-page-promocard {
+  width: 45vw;
+  left: -7vw;
+  padding:2vh 1vh 10vh 1vh;
+  background-color: #0b9cbd;
+  display: grid;
+  grid-template-rows: 2fr 5fr;
+}
+.promo-card-label {
+  font: 600 normal 1.75rem Poppins, Arial, sans-serif;
+  color: #fff;
+  width: 50%;
+  margin: 0.5vh auto;
+  padding: 5vh 5vh 0vh;
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.promo-img-list {
+  margin: 1vh 1vw;
+  display: grid;
+  grid-template-columns: 6fr 7fr;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.doctor.signup {
+  height: 60vh;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.unordered-list {
+  color: #e2faff;
+  font: 500 normal 15px/1.3 Poppins, arial, sans-serif;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  list-style: none;
+  padding-left: 1.2em;
 }
-
-.App-link {
-  color: #61dafb;
+.list-item {
+  background-image: url(./assets/list-bullet.png);
+  background-repeat: no-repeat;
+  background-size: 1.2em;
+  padding-left: 1.5em;
+  background-position-y: center;
+  margin: 0.5vh 0vh;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-form {
+  padding: 1vh 1vw;
+}
+.login-logo {
+  font: 600 normal 1.2rem/1.5 Poppins, Arial, sans-serif;
+  position: absolute;
+  right: 10vh;
+  margin: 1vh 2vh 5vh 2vh;
+}
+.login-form h1 {
+  margin: 5vh 3vh 1vh;
+}
+.input-set {
+  border-radius: 5px;
+  padding: 2px 5px;
+  margin: 3vh;
+  color: #afafaf;
+}
+.input {
+  font: 400 normal 1rem/1.5 Poppins, Arial, sans-serif;
+  border: none;
+  outline: none;
+}
+.name-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-basis: 50%;
 }
