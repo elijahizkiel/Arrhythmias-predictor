@@ -1,7 +1,8 @@
+import assets from '../assets/imgs'
 function UserAvatar({ imgSource }) {
   return (
     <div className="user-avatar">
-      <img src={imgSource} alt="" />
+      <img src={assets.listBullet} alt="" />
     </div>
   );
 }

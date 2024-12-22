@@ -3,7 +3,7 @@ import Label from "./Label";
 function MessagesArea({ messages }) {
   return (
     <div className="message-area">
-      {!messages ? (
+      {messages === null || messages === undefined ? (
         <>
           <Label
             key="bold-faced"
