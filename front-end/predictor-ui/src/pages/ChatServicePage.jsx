@@ -9,7 +9,7 @@ function ChatServicePage({ chats, onHome, user }) {
       <header className="chat-header">
         <Label classes="logo" text="we care" onClick={onHome} />
         <UserAvatar
-          imgSource={`https://avatar.iran.liara.run/username?username=${user.firstName}+${user.lastName}`}
+          imgSource={user?`https://avatar.iran.liara.run/username?username=${user.firstName}+${user.lastName}`:`https://avatar.iran.liara.run/username?username=user`}
         />
       </header>
       <main>

@@ -1,22 +1,23 @@
 import Button from "../components/Button.jsx";
 import Label from "../components/Label.jsx";
 import Card from "../components/Card.jsx";
-import "./LandingPage.css";
 import assets from "../assets/imgs.js";
+import {useContext } from 'react';
+import { LoginContext } from '../LoginProvider.jsx'
 
 function LandingPage({
-  loginState,
-  onLogInBtnCLick,
-  onDiagnoseBtnClick,
-  onChatServBtnClick,
+  onLogin,
+  onDiagnose,
+  onChatService,
   onContactList,
 }) {
+  let {loginState, logout} = useContext(LoginContext)
   return (
     <div style={{ paddingBottom: "20vh", marginBottom: "10vh" }}>
       <header>
         <Label classes="logo" text="we care" />
         <Button
-          sendRequest={onLogInBtnCLick}
+          sendRequest={loginState?logout:onLogin}
           text={loginState ? "LogOut" : "Login/Signup"}
           classes="login-signup btn"
           style={{ display: "flex", fontFamily: "serif" }}
@@ -46,13 +47,13 @@ function LandingPage({
             text="Diagnose"
             classes="btn primary"
             style={{ display: "inline-block", fontFamily: "serif" }}
-            sendRequest={onDiagnoseBtnClick}
+            sendRequest={onDiagnose}
           />
           <Button
             text="Chat Service"
             classes="btn secondary"
             style={{ fontFamily: "serif", display: "inline-block" }}
-            sendRequest={onChatServBtnClick}
+            sendRequest={onChatService}
           />
         </div>
         <img
