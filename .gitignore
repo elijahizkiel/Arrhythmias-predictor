@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 front-end/predictor-ui/README.md
+front-end/predictor-ui/build
+
+#back-end virtual environment local files
+/back-end/env 
