@@ -1,9 +1,13 @@
+import { ChatContext } from "../ChatProvider";
 import Label from "./Label";
+import { useContext } from "react";
 
-function MessagesArea({ messages }) {
+
+function MessagesArea() {
+  let {chats} = useContext(ChatContext);
   return (
     <div className="message-area">
-      {messages === null || messages === undefined ? (
+      {chats === null || chats === undefined ? (
         <>
           <Label
             key="bold-faced"
@@ -17,7 +21,7 @@ function MessagesArea({ messages }) {
           />
         </>
       ) : (
-        messages.map((message, index) => (
+        chats.map((message, index) => (
           <Label
             key={message.role + String(index)}
             classes={"message " + message.role}
