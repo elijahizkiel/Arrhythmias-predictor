@@ -23,7 +23,7 @@ function LandingPage({
           style={{ display: "flex", fontFamily: "serif" }}
         >
           {loginState ? (
-            <span class="material-symbols-outlined">logout</span>
+            <span className="material-symbols-outlined">logout</span>
           ) : null}
         </Button>
       </header>
