@@ -1,4 +1,4 @@
-function InputField({ type, id, classes, label, children, required }) {
+function InputField({ type, id, classes, label, children, required, val, onInput }) {
   return (
     <>
       <fieldset className="input-set">
@@ -12,6 +12,8 @@ function InputField({ type, id, classes, label, children, required }) {
           style={{ width: "100%" }}
           required={required}
           className={classes}
+          value={val}
+          onInput={(e) => {onInput(e.target.value)}}
         />
         {children}
       </fieldset>

@@ -1,8 +1,8 @@
-function TextArea({classes, defaultText, children}){
+function TextArea({classes, defaultText, children, val, onInput}){
     return (
         <div className={'messaging-fieldset'}>
             {children}
-            <textarea className={"text-area " + classes} placeholder={defaultText} ></textarea>
+            <textarea className={"text-area " + classes} onInput={onInput} value={val} placeholder={defaultText} ></textarea>
         </div>
     );
 }
