@@ -9,7 +9,14 @@ function LoginSignupForm({
   onLogin,
   onHome,
 }) {
-  let [hasAccount, setHasAccount] = useState(false);
+  let [hasAccount, setHasAccount] = useState(true);
+  let [userInfo, setUserInfo] = useState({
+    userName: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
   return (
     <div className="login-form">
       <Label classes="login logo" text="we care" onClick={onHome} />
@@ -22,12 +29,24 @@ function LoginSignupForm({
             id="first-name"
             label="First Name"
             required={true}
+            onInput={(firstName) => {
+              setUserInfo((info) => {
+                return { ...info, firstName: firstName };
+              });
+            }}
+            val={userInfo.firstName}
           />
           <InputField
             type="text"
             classes="name input"
             id="last-name"
             label="Last Name"
+            onInput={(lastName) => {
+              setUserInfo((info) => {
+                return { ...info, lastName: lastName };
+              });
+            }}
+            val={userInfo.lastName}
           />
         </div>
       )}
@@ -37,6 +56,12 @@ function LoginSignupForm({
         id="user-email"
         label={hasAccount ? "Email or Username" : "Email"}
         required={true}
+        onInput={(email) => {
+          setUserInfo((info) => {
+            return { ...info, email: email };
+          });
+        }}
+        val={userInfo.email}
       />
       {!hasAccount && (
         <InputField
@@ -45,6 +70,12 @@ function LoginSignupForm({
           id="user-name"
           label="User Name"
           required={true}
+          onInput={(userName) => {
+            setUserInfo((info) => {
+              return { ...info, userName: userName };
+            });
+          }}
+          val={userInfo.userName}
         />
       )}
       <InputField
@@ -53,6 +84,12 @@ function LoginSignupForm({
         id="user-password"
         label="Password"
         required={true}
+        onInput={(password) => {
+          setUserInfo((info) => {
+            return { ...info, password: password };
+          });
+        }}
+        val={userInfo.password}
       />
       <Button
         text={hasAccount ? "Login" : "Create Account"}
@@ -61,31 +98,24 @@ function LoginSignupForm({
         sendRequest={
           hasAccount
             ? () => {
-                const [email, password] = [
-                  document.getElementById("first-name").value,
-                  document.getElementById("last-name").value,
-                  document.getElementById("user-name").value,
-                  document.getElementById("user-email").value,
-                  document.getElementById("user-password").value,
-                ];
-                if( email===''|| password===''){
-                  window.alert('please insert all indicated necessary fileds')
-                  return;}
-                onLogin(email, password);
-              }
-            : () => {
-                const [firstName, lastName, userName, email, password] = [
-                  document.getElementById("first-name").value,
-                  document.getElementById("last-name").value,
-                  document.getElementById("user-name").value,
-                  document.getElementById("user-email").value,
-                  document.getElementById("user-password").value,
-                ];
-                if(firstName ===''|| userName===''|| email===''|| password===''){
-                  window.alert('please insert all indicated necessary fileds')
+                if (userInfo.email === "" || userInfo.password === "") {
+                  window.alert("please insert all indicated necessary fields");
                   return;
                 }
-                onCreateAccount(firstName, lastName, userName, email, password);
+                onLogin(userInfo.email, userInfo.password);
+                onHome();
+              }
+            : () => {
+                if (
+                  userInfo.firstName === "" ||
+                  userInfo.userName === "" ||
+                  userInfo.email === "" ||
+                  userInfo.password === ""
+                ) {
+                  window.alert("please insert all indicated necessary fields");
+                  return;
+                }
+                return onCreateAccount(userInfo);
               }
         }
       />
