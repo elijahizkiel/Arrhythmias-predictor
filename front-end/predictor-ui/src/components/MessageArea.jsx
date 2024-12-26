@@ -25,7 +25,7 @@ function MessagesArea() {
           <Label
             key={message.role + String(index)}
             classes={"message " + message.role}
-            text={message.part}
+            text={message.parts}
           />
         ))
       )}

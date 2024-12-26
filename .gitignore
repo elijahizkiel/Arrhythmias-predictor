@@ -13,7 +13,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
 .idea
 .DS_Store
@@ -26,4 +26,6 @@ front-end/predictor-ui/README.md
 front-end/predictor-ui/build
 
 #back-end virtual environment local files
-/back-end/env 
+/back-end/venv 
+/back-end/__pycache__
+/back-end/.env

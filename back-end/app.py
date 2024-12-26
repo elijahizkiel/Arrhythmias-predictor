@@ -23,6 +23,6 @@ def getResource(subpath):
 @app.route("/chat-service", methods=["POST"])
 def ask_model():
     question = request.json
-    if not question or "part" not in question:
+    if not question or "parts" not in question:
         return jsonify({"error":"missing part value"}),400
-    return jsonify(model.ask_gemini_text(question.get('part')))
+    return jsonify(model.ask_gemini_text(question.get('parts')))
