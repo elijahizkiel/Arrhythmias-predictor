@@ -69,10 +69,12 @@ def create_account():
 def login():
     data = request.get_json()
     email = data.get('email')
+    username = email
     password = data.get('password')
 
-    user = User.query.filter_by(email=email, password=password).first()
-    if not user:
+    user_email = User.query.filter_by(email=email, password=password).first()
+    user_username = User.query.filter_by(username =username, password=password).first()
+    if not user_email and not user_username:
         return jsonify({'error': 'Invalid credentials. Check username or password'}), 401
 
     # access_token = create_access_token(identity={'id': user.id, 'email': user.email})
