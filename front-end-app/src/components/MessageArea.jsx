@@ -1,25 +1,29 @@
 import { ChatContext } from "../ChatProvider";
 import Label from "./Label";
 import { useContext } from "react";
-
+import BeatLoader from "react-spinners/BeatLoader";
 
 function MessagesArea() {
   function formatText(input) {
     // Replace double asterisks (**) with <strong> tags
-    let strongFormatted = input.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    
+    let strongFormatted = input.replace(
+      /\*\*(.*?)\*\*/g,
+      "<strong>$1</strong>"
+    );
+    console.log(
+      "~~~~~~~~~~~~~~~~~~~~~~~~Strong Formatted text: ",
+      strongFormatted
+    );
+
     // Replace single asterisks (*) with <p> tags
-    let pFormatted = strongFormatted.replace(/\*(.*?)\*/g, '<p>$1</p>');
-    
+    let pFormatted = strongFormatted.replace(/\*(.*?)\*/g, "<p>$1</p>");
+    console.log("~~~~~~~~~~~~~~~~PFormatted: ", pFormatted);
+
     return pFormatted;
   }
-  // const messageArea = (message) =>{
-  //   const child = document.createElement('div');
-  //   child.innerHTML = formatText(message);
-  //   return child;
-  // }
 
-  let {chats} = useContext(ChatContext);
+  let { chats, loadingMessage } = useContext(ChatContext);
+  
   return (
     <div className="message-area">
       {chats === null || chats === undefined ? (
@@ -27,7 +31,7 @@ function MessagesArea() {
           <Label
             key="bold-faced"
             classes={"chat-opening bold-faced"}
-            text="Hello, how are feeling today?"
+            text="Hello, how are you feeling today?"
           />
           <Label
             key={"small-font"}
@@ -35,21 +39,16 @@ function MessagesArea() {
             text="How can I help you today?"
           />
         </>
-      ) : 
-        (
-        chats.map((message, index) => {
-          // let element = 
-          // console.log(element)
-
-          return <Label
+      ) : (
+        chats.map((message, index) => (
+          <Label
             key={message.role + String(index)}
             classes={"message " + message.role}
-            children={<div>{message.parts?formatText(message.parts): ''}</div>}
+            dangerouslySetHtml={message.parts ? formatText(message.parts) : ""}
           />
-          }
-        )
-      )
-      }
+        ))
+      )}
+      {loadingMessage ? <BeatLoader className="message model" /> : null}
     </div>
   );
 }
