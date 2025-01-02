@@ -3,11 +3,10 @@ import { useState, createContext } from "react";
 
 const LoginContext = createContext(null);
 function LoginProvider({ children }) {
-  const isLoggedIn = localStorage.getItem("loginState");
-  const activeUser = localStorage.getItem("user");
-  console.log(`~~~~~~~~~~user retrieved from LocalStorage:~~~~~~~~~~~ \n${activeUser}`)
-  let [loginState, setLoginState] = useState(isLoggedIn ? true : false);
-  let [user, setUser] = useState(JSON.parse(activeUser));
+  // const isLoggedIn = localStorage.getItem("loginState");
+  // const activeUser = localStorage.getItem("user");
+  let [loginState, setLoginState] = useState(false);
+  let [user, setUser] = useState(null);
 
   async function login(email, password) {
     console.log(`request sent to login with ${email} ${password}`);
@@ -19,15 +18,15 @@ function LoginProvider({ children }) {
       chats: [
         {
           role: "user",
-          part: "Hi, I’ve had a mild fever, headache, and fatigue for three days and I’m unsure if it’s serious. Can you tell me if I should see a doctor or try home remedies? If needed, how can I book a virtual consultation? Also, does my insurance cover online appointments, and how can I update my details? Lastly, what warning signs should I watch for that need urgent attention?",
+          parts: "Hi, I’ve had a mild fever, headache, and fatigue for three days and I’m unsure if it’s serious. Can you tell me if I should see a doctor or try home remedies? If needed, how can I book a virtual consultation? Also, does my insurance cover online appointments, and how can I update my details? Lastly, what warning signs should I watch for that need urgent attention?",
         },
         {
           role: "model",
-          part: "Hello! I’m here to help. Based on your symptoms of mild fever, headache, and fatigue, it’s possible that you might have a common viral infection or something like the flu. It’s generally okay to rest, stay hydrated, and use over-the-counter medications like acetaminophen or ibuprofen for fever and headache. However, if your symptoms persist for more than 5 days, worsen, or you experience additional symptoms like difficulty breathing, severe pain, or confusion, you should seek medical attention immediately",
+          parts: "Hello! I’m here to help. Based on your symptoms of mild fever, headache, and fatigue, it’s possible that you might have a common viral infection or something like the flu. It’s generally okay to rest, stay hydrated, and use over-the-counter medications like acetaminophen or ibuprofen for fever and headache. However, if your symptoms persist for more than 5 days, worsen, or you experience additional symptoms like difficulty breathing, severe pain, or confusion, you should seek medical attention immediately",
         },
         {
           role: "user",
-          part: "Hi, I’ve had a mild fever, headache, and fatigue for three days and I’m unsure if it’s serious. Can you tell me if I should see a doctor or try home remedies? If needed, how can I book a virtual consultation? Also, does my insurance cover online appointments, and how can I update my details? Lastly, what warning signs should I watch for that need urgent attention?",
+          parts: "Hi, I’ve had a mild fever, headache, and fatigue for three days and I’m unsure if it’s serious. Can you tell me if I should see a doctor or try home remedies? If needed, how can I book a virtual consultation? Also, does my insurance cover online appointments, and how can I update my details? Lastly, what warning signs should I watch for that need urgent attention?",
         },
         {
           role: "model",
@@ -38,9 +37,7 @@ function LoginProvider({ children }) {
     };
     setUser(newUser);
     localStorage.setItem("loginState", loginState);
-    console.log(
-      `~~~~~~~~~~~user saved to local storage~~~~~~~~~~\n ${newUser}`
-    );
+    
     localStorage.setItem("user", JSON.stringify(newUser));
   }
   function logout() {
@@ -56,15 +53,17 @@ function LoginProvider({ children }) {
     console.log(
       `Account created for {firstName: ${firstName}, lastName: ${lastName}, userName:${userName}, email: ${email}, password:${password}}`
     );
-    // const request = axios.post("/create-account", {
-    //   firstName,
-    //   lastName,
-    //   userName,
-    //   email,
-    //   password,
-    // });
-    // if (200 <= (await request).status && (await request).status < 300) {
-    // }
+    const request = await fetch("/create-account", {
+      method:"POST",
+      body:{
+      firstName,
+      lastName,
+      userName,
+      email,
+      password,}
+    });
+    if (200 <= (await request).status && (await request).status < 300) {
+    }
     return;
   }
   return (
