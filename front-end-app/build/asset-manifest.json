@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.bfdb54be.css",
-    "main.js": "/static/js/main.b264cba3.js",
+    "main.css": "/static/css/main.4fe07dd1.css",
+    "main.js": "/static/js/main.ad2c2149.js",
     "static/media/doctor-landing-page.png": "/static/media/doctor-landing-page.1035b69ca1841d8a121f.png",
     "static/media/doctor-signup-page.png": "/static/media/doctor-signup-page.b9901f4dd265a39a823f.png",
     "static/media/list-bullet.png": "/static/media/list-bullet.4f79933e587ed3b0693b.png",
     "index.html": "/index.html",
-    "main.bfdb54be.css.map": "/static/css/main.bfdb54be.css.map",
-    "main.b264cba3.js.map": "/static/js/main.b264cba3.js.map"
+    "main.4fe07dd1.css.map": "/static/css/main.4fe07dd1.css.map",
+    "main.ad2c2149.js.map": "/static/js/main.ad2c2149.js.map"
   },
   "entrypoints": [
-    "static/css/main.bfdb54be.css",
-    "static/js/main.b264cba3.js"
+    "static/css/main.4fe07dd1.css",
+    "static/js/main.ad2c2149.js"
   ]
 }

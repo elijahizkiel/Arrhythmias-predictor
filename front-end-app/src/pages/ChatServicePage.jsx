@@ -9,7 +9,6 @@ import { useContext } from "react";
 
 function ChatServicePage({ onHome }) {
   let {user} = useContext(LoginContext);
-  console.log(user);
   
   return (
     <ChatProvider initialChat={user ? user.chats : null}>
