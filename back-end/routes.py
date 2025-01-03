@@ -21,6 +21,7 @@ def getResource(subpath):
 
 
 #Abigail's code
+#account creating and login
 @app.route('/create-account', methods=['POST'])
 def create_account():
     data = request.get_json()
@@ -30,6 +31,7 @@ def create_account():
     password = data.get('password')
     email = data.get('email')
 
+    #handling missing fields from serverside
     missing_fields = []
     if not username:
         missing_fields.append("username")
@@ -43,28 +45,22 @@ def create_account():
     if missing_fields:
         return jsonify({'error': f"The following fields are required: {', '.join(missing_fields)}"}), 400
 
-    
-    # if not username and not password and not first_name and not email:
-    #     return jsonify({'error': 'All fields are required'}), 400
-    # elif not password:
-    #     return jsonify({'error': 'password field is required'}), 400
-    # elif not username:
-    #     return jsonify({'error': 'username field is required'}), 400
-    # elif not first_name:
-    #     return jsonify({'error': 'firstname fields are required'}), 400
-    # elif not email:
-    #     return jsonify({'error': ' email field are required'}), 400
-
+    #verifying no double user with same email, and username too
     if User.query.filter_by(email=email).first() :
         return jsonify({'error': 'User already exists'}), 400
-    if User.queryfilter_by(username=username).first():
+    if User.query.filter_by(username=username).first():
         return jsonify({'error': "username already exist please choose another"}), 400
+    
+    #create new user instance on the database
     new_user = User(username=username, first_name=first_name, last_name=last_name, password=password, email=email)
     db.session.add(new_user)
     db.session.commit()
 
-    return jsonify({'message': 'Account has been created successfully!'}), 201
+    #get new created instance of the user
+    user = User.query.filter_by(email=email).first()
+    return jsonify({"user":user.to_json(),'message': 'Account has been created successfully!'}), 201
 
+#login by using previously existing account
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
@@ -76,9 +72,10 @@ def login():
     user_username = User.query.filter_by(username =username, password=password).first()
     if not user_email and not user_username:
         return jsonify({'error': 'Invalid credentials. Check username or password'}), 401
-
+    user = user_username or user_email
+    
     # access_token = create_access_token(identity={'id': user.id, 'email': user.email})
-    return jsonify({'access_token': "access_token created"}), 200
+    return jsonify({"user":user.to_json(),'access_token': "access_token created"}), 200
 
 #Abigail's code ends here
 

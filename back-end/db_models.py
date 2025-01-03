@@ -24,8 +24,3 @@ class Message(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     content = db.Column(JSONB, nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
-
-    # def to_json(self):
-    #     return {
-
-    #     }
