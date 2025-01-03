@@ -1,6 +1,7 @@
 import InputField from "./InputField";
 import Button from "./Button";
 import Label from "./Label";
+
 import { useState } from "react";
 
 function LoginSignupForm({
@@ -11,12 +12,13 @@ function LoginSignupForm({
 }) {
   let [hasAccount, setHasAccount] = useState(true);
   let [userInfo, setUserInfo] = useState({
-    userName: "",
+    username: "",
     firstName: "",
     lastName: "",
     email: "",
     password: "",
   });
+  let [wrongTrial, setWrongTrial] = useState(false)
   return (
     <div className="login-form">
       <Label classes="login logo" text="we care" onClick={onHome} />
@@ -36,6 +38,7 @@ function LoginSignupForm({
             }}
             val={userInfo.firstName}
           />
+          {userInfo.firstName === "" && <p style={{ color:"red" }}>FirstName is required! </p>}
           <InputField
             type="text"
             classes="name input"
@@ -63,8 +66,9 @@ function LoginSignupForm({
         }}
         val={userInfo.email}
       />
+        {userInfo.email === "" && <p style={{ color:"red" }}>Email is required! </p>}
       {!hasAccount && (
-        <InputField
+        <><InputField
           type="text"
           classes="username-field input"
           id="user-name"
@@ -77,7 +81,10 @@ function LoginSignupForm({
           }}
           val={userInfo.userName}
         />
+        {userInfo.username === "" && <p style={{ color:"red" }}>userame is required! </p>}
+        </>
       )}
+      
       <InputField
         type="password"
         classes="password input"
@@ -91,31 +98,42 @@ function LoginSignupForm({
         }}
         val={userInfo.password}
       />
+      {userInfo.password === "" && <p style={{ color:"red" }}>password is required! </p>}
+      {wrongTrial && <p style={{"color":"red"}}>Wrong password or email!</p>}
       <Button
         text={hasAccount ? "Login" : "Create Account"}
         classes="btn primary"
         style={{ margin: "2vh 1vh" }}
         sendRequest={
           hasAccount
-            ? () => {
+            ?async () => {
+              try{
                 if (userInfo.email === "" || userInfo.password === "") {
-                  window.alert("please insert all indicated necessary fields");
                   return;
                 }
-                onLogin(userInfo.email, userInfo.password);
-                onHome();
+                let loggedIn = await onLogin(userInfo.email, userInfo.password);
+                console.log("~~~~~~~~~~loggedIn state: ", loggedIn)
+                if(loggedIn){onHome()}
+                else{
+                  setWrongTrial(true)
+                }
+              }catch(er){
+                window.alert("something went wrong try again later!")
+                console.log("login error: " + er);
               }
-            : () => {
+              }
+            :async () => {
                 if (
                   userInfo.firstName === "" ||
-                  userInfo.userName === "" ||
+                  userInfo.username === "" ||
                   userInfo.email === "" ||
                   userInfo.password === ""
                 ) {
-                  window.alert("please insert all indicated necessary fields");
+                  // window.alert("please insert all indicated necessary fields");
                   return;
                 }
-                return onCreateAccount(userInfo);
+                let accountCreated = await onCreateAccount(userInfo);
+                
               }
         }
       />
