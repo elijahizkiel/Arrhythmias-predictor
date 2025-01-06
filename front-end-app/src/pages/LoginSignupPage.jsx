@@ -8,7 +8,7 @@ function LoginPage({onHome}){
     return (
     <div className="login-page">
         <LoginPagePromoCard />
-        <LoginSignupForm onHome={onHome} onLogin={login} onCreteAccount={createAccount} /> 
+        <LoginSignupForm onHome={onHome} onLogin={login} onCreateAccount={createAccount} /> 
     </div>)
 }
 
