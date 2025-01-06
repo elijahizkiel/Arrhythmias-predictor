@@ -50,18 +50,19 @@ function LoginProvider({ children }) {
         "Content-Type": "application/json",
       },
       body:JSON.stringify({
-      "firstName":firstName,
-      "lastName":lastName,
-      "username":username,
-      "email":email,
-      "password":password,
-    })
+        "firstName":firstName,
+        "lastName":lastName,
+        "username":username,
+        "email":email,
+        "password":password,
+      })
     });
+    const newUser = request.json().user
     if (200 <= (await request).status && (await request).status < 300) {
-      setUser(request.json().user)
+      setUser(newUser)
       setLoginState(true)
     }
-    return request.json().user;
+    return newUser;
   }
   return (
     <LoginContext.Provider
