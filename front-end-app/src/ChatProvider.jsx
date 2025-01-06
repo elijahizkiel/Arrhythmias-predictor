@@ -13,21 +13,24 @@ function ChatProvider({ children, initialChat }) {
   }  
 
   async function sendMessage(message) {
-    let msg = { role: "user", parts: message };
-    
-    addMessageToChatRoom(msg);
+    let msg;
+    let response;
+    if(message.trim() !== ""){
+      msg = { role: "user", parts: message.trim() };
+      addMessageToChatRoom(msg);
 
-    let response = await fetch("/chat-service", {
+      response = await fetch("/chat-service", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(msg),
     }).then(response => response.json());
-    
-    setChat((chat) => {
+  }
+    if(response){
+      setChat(chat => {
       setLoadingMessage(false)      
       return [...chat,response];
-    });
-        
+      });
+    }
   }
   return (
     <ChatContext.Provider value={{ loadingMessage, chats, sendMessage }}>
