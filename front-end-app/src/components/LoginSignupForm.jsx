@@ -76,10 +76,10 @@ function LoginSignupForm({
           required={true}
           onInput={(userName) => {
             setUserInfo((info) => {
-              return { ...info, userName: userName };
+              return { ...info, username: userName };
             });
           }}
-          val={userInfo.userName}
+          val={userInfo.username}
         />
         {userInfo.username === "" && <p style={{ color:"red" }}>userame is required! </p>}
         </>
@@ -133,7 +133,9 @@ function LoginSignupForm({
                   return;
                 }
                 let accountCreated = await onCreateAccount(userInfo);
-                
+                if(accountCreated){
+                  onHome();
+                }
               }
         }
       />
