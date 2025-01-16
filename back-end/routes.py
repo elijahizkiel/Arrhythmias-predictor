@@ -94,9 +94,24 @@ def diagnose():
     if not data:
         return jsonify({"error":"missing patient ecg data"})
     patient_ecg = data.get('patient_ecg')
-    ecg_data =[reading for reading in patient_ecg]
+
+    age = patient_ecg.get('age')
+    gender= patient_ecg.get('gender')
+    heart_rate= patient_ecg.get('heartRate')
+    qrs_duration = patient_ecg.get('qrsDuration')
+    qt_interval = patient_ecg.get('qt')
+    qt_corrected = patient_ecg.get('qtc')
+    qrs_count = patient_ecg.get('qrsCount')
+    r_axis = patient_ecg.get('rAxis')
+    t_axis = patient_ecg.get('tAxis')
+    missing_values =f"age:{age}, gender:{gender}, heart_rate:{heart_rate}, qrs_duration:{qrs_duration}, qt_interval:{qt_interval},qt_corrected:{qt_corrected},qrs_count:{qrs_count}, r_axis:{r_axis}, t_axis: {t_axis}"
+    if not age or not qrs_duration or not heart_rate or not qt_interval or not qt_corrected or not qrs_count or not r_axis or not t_axis:
+        return jsonify({"error": "missing required field",
+                        "missing":f"{missing_values}"}), 400
+    ecg_data =[age, gender, heart_rate, qrs_duration, qt_interval, qt_corrected, r_axis, t_axis, qrs_count]
+    
 
     prediction = predict(ecg_data)
-    recommendation = model.ask_gemini_text({"role": "user", "parts":f"what is your advice for patient with {prediction}"})
+    recommendation = model.ask_gemini_text({"role": "user", "parts":f"I'm a patient with {prediction[1]};what is activites do you recommend me to do? what should my diet contain? and what tasks dhould i restrain myself from?"})
 
-    return jsonify({"prediction":prediction, "recommendation":recommendation})
+    return jsonify({"prediction":{"prediction4":prediction[0],"prediction12":prediction[1]}, "recommendation":recommendation, "receivedArray":ecg_data})
