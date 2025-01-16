@@ -1,9 +1,11 @@
 import "./App.css";
 import { useState } from "react";
+import { LoginProvider } from "./LoginProvider";
+
 import LandingPage from "./pages/LandingPage";
 import LoginSignupPage from "./pages/LoginSignupPage";
 import ChatServicePage from "./pages/ChatServicePage";
-import { LoginProvider } from "./LoginProvider";
+import DiagnosePage from "./pages/DiagnosePage";
 
 
 function App() {
@@ -40,7 +42,7 @@ function App() {
         <LoginSignupPage onHome={()=>{setTab(tabs.landing);localStorage.setItem('tab',tabs.landing);}} />
       ) : tab === tabs.chat ? (
         <ChatServicePage onHome={()=>{setTab(tabs.landing);localStorage.setItem('tab',tabs.landing);}} />
-      ) : null}
+      ) : <DiagnosePage onHome={()=>{setTab(tabs.landing);localStorage.setItem('tab',tabs.landing);}} />}
     </LoginProvider>
   );
 }

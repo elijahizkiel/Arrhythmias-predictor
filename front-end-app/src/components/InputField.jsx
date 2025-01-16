@@ -1,4 +1,4 @@
-function InputField({ type, id, classes, label, children, required, val, onInput }) {
+function InputField({ type, id, classes, label, children, required, val, onInput, onChange }) {
   return (
     <>
       <fieldset className="input-set">
@@ -7,6 +7,7 @@ function InputField({ type, id, classes, label, children, required, val, onInput
           {required ? <span style={{ color: "red" }}>*</span> : null}
         </legend>
         <input
+        onChange={onchange}
           type={type}
           id={id}
           style={{ width: "100%" }}
