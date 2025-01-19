@@ -104,7 +104,9 @@ function App() {
         ) : tab === tabs.chat ? (
           <ChatServicePage/>
         ) : (
-          <DiagnosePage/>
+          <DiagnosePage onChatBot={()=>{
+            setTab(tabs.chat);
+          localStorage.setItem('tab',tabs.chat);}}/>
         )}
       </main>
       </>

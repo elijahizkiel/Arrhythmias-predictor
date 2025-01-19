@@ -4,7 +4,7 @@ import Label from "../components/Label";
 import assets from "../assets/imgs";
 import Button from "../components/Button";
 
-function DiagnosePage() {
+function DiagnosePage({onChatBot}) {
   let [fields, setFields] = useState({
     age: 0,
     gender: 0,
@@ -20,8 +20,19 @@ function DiagnosePage() {
     qtQTc: true,
     PRTAxis: true,
   });
+  const showResult = (response) => {
+    document.getElementById("diagnose-page").style.filter = "blur(3px)"
+    document.getElementById("result-card").style.display = "block";
+    document.getElementById("result").innerText = "your result here"; //response.prediction.prediction4 +"/"+ response.prediction.prediction12;
+    document.getElementById("recommendation").innerText =
+      "your recommendation will be here"; //response.recommendation;
+  };
+  const closeResult = () => {
+    document.getElementById("diagnose-page").style.filter = "none";
+    document.getElementById("result-card").style.display = "none";
+  };
   return (
-    <div>
+    <div id="diagnose-service">
       <main id="diagnose-page">
         <p className="diagnose-instruction">
           First fill the form and hit <span>&quot;Check result&quot;</span>
@@ -71,7 +82,8 @@ function DiagnosePage() {
                 </div>
                 <fieldset className="input-set">
                   <legend>Gender</legend>
-                  <select className="input"
+                  <select
+                    className="input"
                     value={fields.gender}
                     onChange={(e) => {
                       setFields((prev) => {
@@ -239,7 +251,7 @@ function DiagnosePage() {
               <Button
                 classes="btn submit-btn primary"
                 text="Check Result"
-                sendRequest={async () => {
+                sendRequest={async (e) => {
                   const parseAxis = (t) => {
                     let axes = fields.PRTAxis.split("/");
                     return parseInt(axes[t]);
@@ -271,6 +283,10 @@ function DiagnosePage() {
                     body: JSON.stringify({ patient_ecg: data }),
                   }).then((response) => response.json());
                   console.log(result);
+                  showResult();
+                  e.stopPropagation();
+                  document.getElementById('diagnose-service').addEventListener('click', ()=>{
+                    (document.getElementById('result-card').style.display !== 'none') && closeResult()});
                 }}
               />
             </form>
@@ -285,6 +301,17 @@ function DiagnosePage() {
           </div>
         </div>
       </main>
+      <div id="result-card" className="result-card">
+        <div className="result-header">
+          <h2 className="result-title">Result</h2>
+          <span className="close-result-btn btn" onClick={closeResult}>
+            X
+          </span>
+        </div>
+        <p id="result"></p>
+        <p id="recommendation"></p>
+        <div className="ask-bot">If any further clarification needed ask <Button classes="ask-bot-btn" text="Chat Bot" sendRequest={onChatBot} /></div>
+      </div>
     </div>
   );
 }
