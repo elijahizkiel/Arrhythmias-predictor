@@ -5,19 +5,29 @@
   --color4--: #fefefe;
   --poppins--: Poppins, Arial, sans-serif;
   --konkhmer-sleokchher--: "Konkhmer Sleokchher", sans-serif;
-}
-div {
   font: 400 normal 16px/1.5 var(--poppins--);
 }
 header {
   display: flex;
   justify-content: space-between;
-  padding: 1.5vh 2.5vw;
+  padding: 1vh 2.5vw;
+  min-height: 1.3rem;
+  max-height: 2.5rem;
+  position:sticky;
+  top: 0vh;
+  z-index: 2;
 }
-
 .logo {
   font: 700 normal 2rem/1.5 var(--konkhmer-sleokchher--), sans-serif;
   cursor: pointer;
+}
+.tab {
+  padding: 0.5rem 1vw;
+  cursor: pointer;
+}
+.active {
+  border-radius: 5px;
+  background-color: #9ae0ee;
 }
 .btn {
   background-color: var(--color2--);
@@ -76,6 +86,11 @@ header {
   font: 600 normal 2rem/1.5 var(--konkhmer-sleokchher--), sans-serif;
   margin: 5vw auto;
 }
+.hero-img {
+  position: relative;
+  bottom:-0.5rem;
+  height: 3rem;
+}
 .hero-paragraph.bold {
   font: 600 normal 1.5rem/1.5 var(--poppins--), Arial, sans-serif;
   color: var(--color3--);
@@ -115,11 +130,39 @@ header {
 .card-text {
   border-right: 2px solid var(--color1--);
 }
+@media(max-width:500px){
+
+  .hero-section{
+    display:block;
+  }
+  .hero-title{
+    font-size:1.5rem;
+  }
+  .hero-paragraph.bold{
+    font-size: 1.3rem;
+  }
+  .doctor{
+    visibility: collapse;
+    height:0px
+  }
+  .services-list{
+    /* width: 90vw; */
+    right: calc(0.5 * (100vw - 60vw));
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    text-align: center;
+  }
+
+  
+}
 .login-page {
   display: grid;
   gap: 1vh;
   grid-template-columns: 7fr 6fr;
   padding-right: 1vw;
+  height: 91vh;
+  overflow-y: hidden;
 }
 .login-page-promo {
   overflow: hidden;
@@ -135,11 +178,12 @@ header {
 }
 .circle.one {
   left: 37.5vw;
-  top: -13vh;
+  top: -10vh;
+  z-index: 1;
 }
 .circle.two {
   left: 37.5vw;
-  bottom: -12vh;
+  bottom: -19vh;
 }
 .login-page-promocard {
   width: 45vw;
@@ -212,15 +256,60 @@ header {
   justify-content: space-between;
   flex-basis: 50%;
 }
-/* Don't forget to edit this section again */
-.chat-header {
-  display: flex;
-  min-height: 1.3rem;
-  max-height: 5vh;
-  position:sticky;
-  top: 0vh;
-  background-color: #fff;
+@media (max-width:1000px){
+  :root{
+    font-size: 14px;
+  }
+  .login-page-promocard{
+    display:flex;
+    flex-direction: column;
+    height:88vh;
+  }
+  .promo-img-list{
+    display:block;
+    padding:3vw;
+  }
+  .promo-card-label{
+    font-size: 1.3rem;
+  }
+  .circle{
+    width: 0px;
+    height:0px;
+  }
+  .doctor.signup {
+    width:0px;
+    height:0px;
+    visibility: hidden;
+  }
 }
+@media (max-width:500px){
+  :root{
+    font-size: 10px;
+  }
+  .logo{
+    font-size: 1rem;
+  }
+  .login-page{
+    display: block;
+    padding: 3vw;
+  }
+  .login h1{
+    margin-top: 1vh;
+  }
+  .login-page-promo{
+    height:0px;
+  }
+  .login-page-promocard{
+    visibility: collapse;
+    width:0px;
+    max-height:0px;
+  }
+  .login-form{
+    padding:0vw 4vw;
+  }
+}
+/* Don't forget to edit this section again */
+
 .user-avatar img {
   width: max(5vh,1.2rem);
   aspect-ratio: 1, 1;
@@ -248,24 +337,23 @@ header {
 }
 .message-area .model {
   align-self: first baseline;
-  background-color: #afafaf;
+  background-color: #eeeeeea0;
 }
 .message-area .message.user {
   align-self:last baseline;
-  background-color: #eeeeeea0;
+  background-color: #afafaf;
 }
 .messaging-field{
-  width: 100%;
+  width: 95%;
   padding: 0vh;
   display: grid;
-  grid-template-columns: 90% 5%;
-  column-gap: 1rem;
-  margin: 1rem; 
-  /* justify-content: ; */
+  grid-template-columns: 85% 10%;
+  column-gap: 2vw;
+  margin: 1vh 2vw; 
 }
 .text-area{
   display: inline-block;
-  min-width: 100%;
+  min-width: max(100%, 80vw);
   font: 400 normal 1rem/1.5 var(--poppins--), arial, sans-serif;
   height: 2rem;
   resize: vertical;
@@ -277,4 +365,88 @@ header {
 .send-btn {
   margin: 5px;
   display: inline;
+  width: fit-content;
+  height: 1.5rem;
+  align-self: last baseline;
+}
+/* Diagnose page layout */
+#diagnose-page {
+  padding-left: 2rem;
+}
+.pointer-hand {
+  height:20vh;
+  rotate: 90deg;
+}
+.diagnose-instruction {
+  text-align:center
+}
+.diagnose-instruction span {
+  color:#0b9cbd
+}
+.input-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.missing-field-warning {
+  padding:0.5rem 2rem;
+  color: red; 
+}
+.submit-btn {
+  width:min(7rem, 40vw);
+}
+@media (max-width:750px){
+  .input-container {
+    flex-direction:column;
+  }
+}
+@media (max-width:500px){
+  .pointer-hand {
+    rotate:180deg;
+  }
+  
+}
+.result-card {
+  position:absolute;
+  display: none;
+  /* z-index: 1; */
+  background-color: #e2faff;
+  width:40vw;
+  min-height:30vh;
+  max-height: fit-content;
+  top:25vh;
+  left:25vw;
+  padding: 1vh 2vh 1vh 5vh ;
+  border-radius: 20px;
+  box-shadow: 7px 7px 7px #0b9cbd;
+}
+.result-header {
+  display: flex;
+  justify-content: space-between;
+}
+.result-header h2 {
+  margin: 10px;
+}
+#result {
+  font:700 normal 1.2rem/1.5 var(--poppins--);
+}
+.close-result-btn {
+  background-color: #e2faff;
+  color: #000000cf;
+  align-self: baseline;
+}
+.close-result-btn:hover {
+  background-color: #9ae0ee;
+  box-shadow: none;
+}
+.ask-bot {
+  color:#3d3333a0
+}
+.ask-bot-btn {
+  display: inline-block;
+}
+@media (max-width:780px){
+  .result-card {
+    left:5vw;
+    width: 75vw;
+  }
 }
