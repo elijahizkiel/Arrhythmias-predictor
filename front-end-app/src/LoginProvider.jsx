@@ -1,15 +1,14 @@
 import { useState, createContext } from "react";
-// import axios from "axios";
 
 const LoginContext = createContext(null);
 function LoginProvider({ children }) {
   const isLoggedIn = localStorage.getItem("loginState");
   const activeUser = localStorage.getItem("user");
+  console.log(activeUser)
+  let [loginState, setLoginState] = useState(JSON.parse(isLoggedIn));
+  let [user, setUser] = useState(JSON.parse(activeUser));
 
-  let [loginState, setLoginState] = useState(isLoggedIn);
-  let [user, setUser] = useState(activeUser);
-
-  async function login(email, password) {
+  async function login({email, password}) {
     const loginRequest = await fetch("/login",{
       method:"POST",
       headers: {
@@ -21,18 +20,16 @@ function LoginProvider({ children }) {
       })
     }).then(response=>response.json()) 
     let newUser = await loginRequest.user
-    console.log(newUser);
-    
+        
     if(newUser){
     setUser(newUser);
     setLoginState(true);
     }
-    localStorage.setItem("loginState", loginState);    
+    localStorage.setItem("loginState", JSON.stringify(loginState));    
     localStorage.setItem("user", JSON.stringify(newUser));
     return newUser;
   }
   function logout() {
-    console.log("logged out");
     setLoginState(false);
     setUser(null);
 
