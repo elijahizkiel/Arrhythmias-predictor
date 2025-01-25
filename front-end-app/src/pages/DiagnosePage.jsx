@@ -23,9 +23,8 @@ function DiagnosePage({onChatBot}) {
   const showResult = (response) => {
     document.getElementById("diagnose-page").style.filter = "blur(3px)"
     document.getElementById("result-card").style.display = "block";
-    document.getElementById("result").innerText = "your result here"; //response.prediction.prediction4 +"/"+ response.prediction.prediction12;
-    document.getElementById("recommendation").innerText =
-      "your recommendation will be here"; //response.recommendation;
+    document.getElementById("result").innerText = response.prediction.prediction4 +"/"+ response.prediction.prediction12;
+    document.getElementById("recommendation").innerText = response.recommendation.parts;
   };
   const closeResult = () => {
     document.getElementById("diagnose-page").style.filter = "none";
@@ -283,7 +282,7 @@ function DiagnosePage({onChatBot}) {
                     body: JSON.stringify({ patient_ecg: data }),
                   }).then((response) => response.json());
                   console.log(result);
-                  showResult();
+                  showResult(result);
                   e.stopPropagation();
                   document.getElementById('diagnose-service').addEventListener('click', ()=>{
                     (document.getElementById('result-card').style.display !== 'none') && closeResult()});
