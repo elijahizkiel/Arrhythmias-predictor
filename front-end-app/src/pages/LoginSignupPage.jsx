@@ -8,7 +8,12 @@ function LoginPage({onHome}){
     return (
     <div className="login-page">
         <LoginPagePromoCard />
-        <LoginSignupForm onHome={onHome} onLogin={login} onCreateAccount={createAccount} /> 
+        <LoginSignupForm onHome={onHome} onLogin={async(email, password) => {
+            let user = await login({email,password})
+            if(user){
+                onHome()
+            }
+            }} onCreateAccount={createAccount} /> 
     </div>)
 }
 
