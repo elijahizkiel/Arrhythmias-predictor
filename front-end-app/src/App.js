@@ -104,9 +104,6 @@ function App() {
               setTab(tabs.chat);
               localStorage.setItem("tab", tabs.chat);
             }}
-            onContactList={() => (
-              <div>list of heart speciality clinics Contacts'</div>
-            )}
           />
         ) : tab === tabs.login ? (
           <LoginSignupPage onHome={()=>{

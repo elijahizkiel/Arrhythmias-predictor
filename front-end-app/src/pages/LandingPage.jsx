@@ -3,19 +3,36 @@ import Label from "../components/Label.jsx";
 import Card from "../components/Card.jsx";
 import assets from "../assets/imgs.js";
 
-function LandingPage({
-  onDiagnose,
-  onChatService,
-  onContactList,
-}) {
+
+function LandingPage({ onDiagnose, onChatService }) {
+  let contacts = [
+      { name: "LandMark Hospital", phone: "+251 115 525 463" },
+      { name: "Addis Cardiac center", phone: "+251 116 634 740" },
+      { name: "Addis Hiwot General Hospital", phone: "+251 116 180 449" },
+      { name: "ICMC General hospital", phone: "+251 116 678 646" },
+      {
+        name: "Washington Medical Center Addis Ababa",
+        phone: "+251 116 635 969",
+      },
+    ];
+
+  const onContactList = () => {
+    document.getElementsByClassName("landing-page")[0].style.filter = "blur(3px)";
+    document.getElementById('contact-list').style.display = "block"; 
+  };
   return (
     <div style={{ paddingBottom: "20vh", marginBottom: "10vh" }}>
+      <div className="landing-page">
       <div className="ellipse one"></div>
       <div className="ellipse two"></div>
       <div className="hero-section">
         <div className="hero-texts">
           <Label text="Welcome!" classes="hero-title">
-            <img className="hero-img" src={assets.stetescope} alt="a stethoscope" />
+            <img
+              className="hero-img"
+              src={assets.stetescope}
+              alt="a stethoscope"
+            />
           </Label>
           <Label
             classes="hero-paragraph bold"
@@ -66,6 +83,23 @@ function LandingPage({
             text="Contact List"
           />
         </Card>
+      </div>
+      </div>
+      <div
+        id="contact-list" 
+        onClick={() => {
+          document.getElementById("contact-list").style.display = 'none';
+          document.getElementsByClassName("landing-page")[0].style.filter = "none";
+        }}
+      >
+        {contacts.map((contact) => {
+          return (
+            <div className="contact" key={contact.name}>
+              <div>{contact.name}</div>
+              <div>{contact.phone}</div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
