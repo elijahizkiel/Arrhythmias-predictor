@@ -92,14 +92,20 @@ function LandingPage({ onDiagnose, onChatService }) {
           document.getElementsByClassName("landing-page")[0].style.filter = "none";
         }}
       >
+        <div className="modal-header" >
+        <h2 className="modal-title">Contacts </h2>
+        <span className="btn close-modal-btn">X</span>
+        </div>
+        <div className="contacts" >
         {contacts.map((contact) => {
           return (
             <div className="contact" key={contact.name}>
-              <div>{contact.name}</div>
-              <div>{contact.phone}</div>
+              <div className="contact-name">{contact.name}</div>
+              <div className="contact-num">{contact.phone}</div>
             </div>
           );
         })}
+        </div>
       </div>
     </div>
   );

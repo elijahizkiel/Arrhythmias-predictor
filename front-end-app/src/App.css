@@ -130,6 +130,35 @@ header {
 .card-text {
   border-right: 2px solid var(--color1--);
 }
+#contact-list {
+  position:absolute;
+  display: none;
+  background-color: #e2faff;
+  width:50vw;
+  min-height:30vh;
+  max-height: fit-content;
+  top:25vh;
+  left:30vw;
+  padding: 1vh 2vh 1vh 5vh ;
+  border-radius: 20px;
+  box-shadow: 7px 7px 7px #0b9cbd;
+}
+.contacts {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+
+}
+.contact {
+  margin: 0.5rem;
+  border-radius: 5px;
+  background-color: #9ae0ee;
+  padding:10px;
+  box-shadow: 3px 3px 10px #000000cf ;
+}
+.contact-name {
+  font-weight: 500;
+  font-family:var(--konkhmer-sleokchher--);
+}
 @media(max-width:500px){
 
   .hero-section{
@@ -408,7 +437,6 @@ header {
 .result-card {
   position:absolute;
   display: none;
-  /* z-index: 1; */
   background-color: #e2faff;
   width:40vw;
   min-height:30vh;
@@ -419,22 +447,22 @@ header {
   border-radius: 20px;
   box-shadow: 7px 7px 7px #0b9cbd;
 }
-.result-header {
+.modal-header, .result-header {
   display: flex;
   justify-content: space-between;
 }
-.result-header h2 {
+.result-header h2, .modal-header h2 {
   margin: 10px;
 }
 #result {
   font:700 normal 1.2rem/1.5 var(--poppins--);
 }
-.close-result-btn {
+.close-result-btn, .close-modal-btn {
   background-color: #e2faff;
   color: #000000cf;
   align-self: baseline;
 }
-.close-result-btn:hover {
+.close-modal-btn:hover, .close-result-btn:hover {
   background-color: #9ae0ee;
   box-shadow: none;
 }
