@@ -112,6 +112,6 @@ def diagnose():
     
 
     prediction = predict(ecg_data)
-    recommendation = model.ask_gemini_text({"role": "user", "parts":f"I'm a patient with {prediction[1]};what is activites do you recommend me to do? what should my diet contain? and what tasks dhould i restrain myself from?"})
+    recommendation = model.ask_gemini_recommendation({"role": "user", "parts":f"I'm a patient with {prediction[1]};what are activites do you recommend me to do? what should my diet contain? and what tasks should i restrain myself from? please make it short not greater than 50 words."})
 
     return jsonify({"prediction":{"prediction4":prediction[0],"prediction12":prediction[1]}, "recommendation":recommendation, "receivedArray":ecg_data})
