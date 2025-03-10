@@ -10,15 +10,8 @@ function MessagesArea() {
       /\*\*(.*?)\*\*/g,
       "<strong>$1</strong>"
     );
-    console.log(
-      "~~~~~~~~~~~~~~~~~~~~~~~~Strong Formatted text: ",
-      strongFormatted
-    );
-
     // Replace single asterisks (*) with <p> tags
     let pFormatted = strongFormatted.replace(/\*(.*?)\*/g, "<p>$1</p>");
-    console.log("~~~~~~~~~~~~~~~~PFormatted: ", pFormatted);
-
     return pFormatted;
   }
 
@@ -48,7 +41,7 @@ function MessagesArea() {
           />
         ))
       )}
-      {loadingMessage ? <BeatLoader className="message model" /> : null}
+      {loadingMessage ? <BeatLoader /> : null}
     </div>
   );
 }

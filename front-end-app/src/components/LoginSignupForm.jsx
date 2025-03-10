@@ -6,7 +6,7 @@ import { useState } from "react";
 
 function LoginSignupForm({
   onCreateAccount,
-  onContinueWithGoogle,
+  // onContinueWithGoogle,
   onLogin,
   onHome,
 }) {
@@ -151,7 +151,7 @@ function LoginSignupForm({
           {hasAccount ? "Signup" : "Login"}
         </span>
       </Label>
-      <Button
+      {/* <Button
         text="Continue with Google"
         classes="btn secondary"
         style={{
@@ -160,7 +160,7 @@ function LoginSignupForm({
           border: "1px solid #0b9cbd",
         }}
         sendRequest={onContinueWithGoogle}
-      />
+      /> */}
     </div>
   );
 }
