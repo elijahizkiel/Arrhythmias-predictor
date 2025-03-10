@@ -77,6 +77,9 @@ header {
   left: min(calc(-0.5 * 35vw), calc(-0.5 * 35vh));
   top: max(calc(0.25 * 40vw), calc(0.25 * 40vh));
 }
+.blurred {
+  filter: blur(3px);
+}
 .hero-section {
   display: grid;
   grid-template-columns: 2fr 1fr;

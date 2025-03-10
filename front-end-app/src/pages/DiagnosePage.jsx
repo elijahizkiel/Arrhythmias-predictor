@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import InputField from "../components/InputField";
 import Label from "../components/Label";
 import assets from "../assets/imgs";
 import Button from "../components/Button";
 
-function DiagnosePage({onChatBot}) {
+function DiagnosePage({ onChatBot }) {
   let [fields, setFields] = useState({
     age: 0,
     gender: 0,
@@ -14,25 +14,32 @@ function DiagnosePage({onChatBot}) {
     PRTAxis: "",
   });
   let [missingFields, setMissing] = useState({
-    age: true,
-    HRBeat: true,
-    qrsDuration: true,
-    qtQTc: true,
-    PRTAxis: true,
+    age: 0,
+    HRBeat: 0,
+    qrsDuration: 0,
+    qtQTc: 0,
+    PRTAxis: 0,
   });
+
+  const [showingResult, setShowingResult] = useState(false);
+
+  const result = useRef(null);
+  const recommendation = useRef(null);
+  const diagnosePage = useRef(null);
+
   const showResult = (response) => {
-    document.getElementById("diagnose-page").style.filter = "blur(3px)"
-    document.getElementById("result-card").style.display = "block";
-    document.getElementById("result").innerText = response.prediction.prediction4 +"/"+ response.prediction.prediction12;
-    document.getElementById("recommendation").innerText = response.recommendation.parts;
+    result.current.innerText =
+      response.prediction.prediction4 + "/" + response.prediction.prediction12;
+    recommendation.innerText = response.recommendation.parts;
   };
   const closeResult = () => {
-    document.getElementById("diagnose-page").style.filter = "none";
-    document.getElementById("result-card").style.display = "none";
+    diagnosePage.current.classes = "diagnose-page";
+    setShowingResult(false);
   };
   return (
     <div id="diagnose-service">
-      <main id="diagnose-page">
+      <main id="diagnose-page" ref={diagnosePage} className="diagnose-page">
+        <h1 className="diagnose-title">Diagnose</h1>
         <p className="diagnose-instruction">
           First fill the form and hit <span>&quot;Check result&quot;</span>
           button to see result!
@@ -52,14 +59,14 @@ function DiagnosePage({onChatBot}) {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            age: true,
+                            age: 1,
                           };
                         });
                       } else {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            age: false,
+                            age: 2,
                           };
                         });
                       }
@@ -71,15 +78,18 @@ function DiagnosePage({onChatBot}) {
                         return { ...prev, age: e };
                       });
                     }}
-                    required={true}
+                    required
                   />
-                  {missingFields.age && (
+                  {missingFields.age === 1 && (
                     <p className="missing-field-warning">
                       please fill the patient's age
                     </p>
                   )}
                 </div>
-                <fieldset className="input-set">
+                <fieldset
+                  style={{ maxHeight: "fit-content" }}
+                  className="input-set"
+                >
                   <legend>Gender</legend>
                   <select
                     className="input"
@@ -107,14 +117,14 @@ function DiagnosePage({onChatBot}) {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            HRBeat: true,
+                            HRBeat: 1,
                           };
                         });
                       } else {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            HRBeat: false,
+                            HRBeat: 2,
                           };
                         });
                       }
@@ -124,13 +134,13 @@ function DiagnosePage({onChatBot}) {
                         return { ...prev, HRBeat: e };
                       });
                     }}
-                    required={true}
+                    required
                   />
-                  {missingFields.HRBeat ? (
+                  {missingFields.HRBeat === 1 && (
                     <p className="missing-field-warning">
                       please fill the patient's heart beat{" "}
                     </p>
-                  ) : null}
+                  )}
                 </div>
                 <div className="qrs-duration">
                   <InputField
@@ -143,14 +153,14 @@ function DiagnosePage({onChatBot}) {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            qrsDuration: true,
+                            qrsDuration: 1,
                           };
                         });
                       } else {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            qrsDuration: false,
+                            qrsDuration: 2,
                           };
                         });
                       }
@@ -162,9 +172,9 @@ function DiagnosePage({onChatBot}) {
                         return { ...prev, qrsDuration: e };
                       });
                     }}
-                    required={true}
+                    required
                   />
-                  {missingFields.qrsDuration && (
+                  {missingFields.qrsDuration === 1 && (
                     <p className="missing-field-warning">
                       please fill the QRS from the reading
                     </p>
@@ -181,14 +191,14 @@ function DiagnosePage({onChatBot}) {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            qtQTc: true,
+                            qtQTc: 1,
                           };
                         });
                       } else {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            qtQTc: false,
+                            qtQTc: 2,
                           };
                         });
                       }
@@ -200,9 +210,9 @@ function DiagnosePage({onChatBot}) {
                         return { ...prev, qtQTc: e };
                       });
                     }}
-                    required={true}
+                    required
                   />
-                  {missingFields.qtQTc && (
+                  {missingFields.qtQTc === 1 && (
                     <p className="missing-field-warning">
                       please fill the patient's QT/QTc
                     </p>
@@ -218,14 +228,14 @@ function DiagnosePage({onChatBot}) {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            PRTAxis: true,
+                            PRTAxis: 1,
                           };
                         });
                       } else {
                         setMissing((prev) => {
                           return {
                             ...prev,
-                            PRTAxis: false,
+                            PRTAxis: 2,
                           };
                         });
                       }
@@ -233,14 +243,14 @@ function DiagnosePage({onChatBot}) {
                     type="text"
                     label="P/QRS/T"
                     val={fields.PRTAxis}
-                    required={true}
+                    required
                     onInput={(e) => {
                       setFields((prev) => {
                         return { ...prev, PRTAxis: e };
                       });
                     }}
                   />
-                  {missingFields.PRTAxis && (
+                  {missingFields.PRTAxis === 1 && (
                     <p className="missing-field-warning">
                       please fill the patient's P/QRS/T
                     </p>
@@ -270,10 +280,6 @@ function DiagnosePage({onChatBot}) {
                     tAxis: parseAxis(2),
                     qrsCount: Math.round(fields.HRBeat / 6),
                   };
-                  console.log(
-                    "~~~~~~~~~~~~&&& data sent for diagnose~~~~~~~~~~`",
-                    data
-                  );
                   const result = await fetch("/diagnose", {
                     method: "POST",
                     headers: {
@@ -281,11 +287,11 @@ function DiagnosePage({onChatBot}) {
                     },
                     body: JSON.stringify({ patient_ecg: data }),
                   }).then((response) => response.json());
-                  console.log(result);
                   showResult(result);
                   e.stopPropagation();
-                  document.getElementById('diagnose-service').addEventListener('click', ()=>{
-                    (document.getElementById('result-card').style.display !== 'none') && closeResult()});
+                  diagnosePage.addEventListener("click", () => {
+                    closeResult();
+                  });
                 }}
               />
             </form>
@@ -300,17 +306,26 @@ function DiagnosePage({onChatBot}) {
           </div>
         </div>
       </main>
-      <div id="result-card" className="result-card">
-        <div className="result-header">
-          <h2 className="result-title">Result</h2>
-          <span className="close-result-btn btn" onClick={closeResult}>
-            X
-          </span>
+      {showingResult && (
+        <div id="result-card" className="result-card">
+          <div className="result-header">
+            <h2 className="result-title">Result</h2>
+            <span className="close-result-btn btn" onClick={closeResult}>
+              X
+            </span>
+          </div>
+          <p id="result" ref={result}></p>
+          <p id="recommendation" ref={recommendation}></p>
+          <div className="ask-bot">
+            If any further clarification needed ask{" "}
+            <Button
+              classes="ask-bot-btn"
+              text="Chat Bot"
+              sendRequest={onChatBot}
+            />
+          </div>
         </div>
-        <p id="result"></p>
-        <p id="recommendation"></p>
-        <div className="ask-bot">If any further clarification needed ask <Button classes="ask-bot-btn" text="Chat Bot" sendRequest={onChatBot} /></div>
-      </div>
+      )}
     </div>
   );
 }
