@@ -1,0 +1,17 @@
+{
+    "build": {
+      "env": {
+        "FLASK_ENV": "production"
+      }
+    },
+    "services": [
+      {
+        "name": "flask-ai-app",
+        "startCommand": "gunicorn server:app",
+        "envVars": {
+          "DATABASE_URL": "@flask-ai-db"
+        }
+      }
+    ]
+  }
+  
